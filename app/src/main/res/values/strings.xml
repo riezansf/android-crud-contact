@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Contact CRUD by Riezan</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_cancel">Cancel</string>
+    <string name="dialog_error_title">Sorry</string>
+
+    <string name="empty_contact">There aren\'t any contact</string>
+    <string name="error_loading_contact">There was a problem loading contact</string>
+</resources>
