@@ -11,6 +11,9 @@ public interface MainMvpView extends MvpView {
 
     void showContactEmpty();
 
-    void showError();
+    void onErrorLoadContact();
 
+    void onDeleteContactSuccess();
+
+    void onDeleteContactFail(String message);
 }

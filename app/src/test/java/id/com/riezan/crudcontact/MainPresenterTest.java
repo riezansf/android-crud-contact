@@ -38,33 +38,33 @@ public class MainPresenterTest {
 //    @Test
 //    public void loadRibotsReturnsRibots() {
 //        List<Ribot> ribots = TestDataFactory.makeListRibots(10);
-//        when(mMockDataManager.getRibots())
+//        when(mMockDataManager.getContact())
 //                .thenReturn(Observable.just(ribots));
 //
 //        mMainPresenter.loadRibots();
 //        verify(mMockMainMvpView).showContactList(ribots);
 //        verify(mMockMainMvpView, never()).showContactEmpty();
-//        verify(mMockMainMvpView, never()).showError();
+//        verify(mMockMainMvpView, never()).onErrorLoadContact();
 //    }
 //
 //    @Test
 //    public void loadRibotsReturnsEmptyList() {
-//        when(mMockDataManager.getRibots())
+//        when(mMockDataManager.getContact())
 //                .thenReturn(Observable.just(Collections.<Ribot>emptyList()));
 //
 //        mMainPresenter.loadRibots();
 //        verify(mMockMainMvpView).showContactEmpty();
 //        verify(mMockMainMvpView, never()).showContactList(ArgumentMatchers.<Ribot>anyList());
-//        verify(mMockMainMvpView, never()).showError();
+//        verify(mMockMainMvpView, never()).onErrorLoadContact();
 //    }
 //
 //    @Test
 //    public void loadRibotsFails() {
-//        when(mMockDataManager.getRibots())
+//        when(mMockDataManager.getContact())
 //                .thenReturn(Observable.<List<Ribot>>error(new RuntimeException()));
 //
 //        mMainPresenter.loadRibots();
-//        verify(mMockMainMvpView).showError();
+//        verify(mMockMainMvpView).onErrorLoadContact();
 //        verify(mMockMainMvpView, never()).showContactEmpty();
 //        verify(mMockMainMvpView, never()).showContactList(ArgumentMatchers.<Ribot>anyList());
 //    }

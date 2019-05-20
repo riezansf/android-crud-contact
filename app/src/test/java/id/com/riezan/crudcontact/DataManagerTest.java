@@ -55,24 +55,24 @@ public class DataManagerTest {
 //
 //        mDataManager.syncRibots().subscribe();
 //        // Verify right calls to helper methods
-//        verify(mMockContactService).getRibots();
+//        verify(mMockContactService).getContact();
 //        verify(mMockDatabaseHelper).setRibots(ribots);
 //    }
 //
 //    @Test
 //    public void syncRibotsDoesNotCallDatabaseWhenApiFails() {
-//        when(mMockContactService.getRibots())
+//        when(mMockContactService.getContact())
 //                .thenReturn(Observable.<List<Ribot>>error(new RuntimeException()));
 //
 //        mDataManager.syncRibots().subscribe(new TestObserver<Ribot>());
 //        // Verify right calls to helper methods
-//        verify(mMockContactService).getRibots();
+//        verify(mMockContactService).getContact();
 //        verify(mMockDatabaseHelper, never()).setRibots(ArgumentMatchers.<Ribot>anyList());
 //    }
 //
 //    private void stubSyncRibotsHelperCalls(List<Ribot> ribots) {
 //        // Stub calls to the ribot service and database helper.
-//        when(mMockContactService.getRibots())
+//        when(mMockContactService.getContact())
 //                .thenReturn(Observable.just(ribots));
 //        when(mMockDatabaseHelper.setRibots(ribots))
 //                .thenReturn(Observable.fromIterable(ribots));

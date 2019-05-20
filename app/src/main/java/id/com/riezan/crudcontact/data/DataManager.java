@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import id.com.riezan.crudcontact.data.model.ResponseMessage;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
@@ -34,16 +35,20 @@ public class DataManager {
         return mPreferencesHelper;
     }
 
-    public Observable<List<ContactData>> getContactLocal(){
+    public Observable<Response<ResponseApi>> getContactData(){
+        return mContactService.getContact();
+    }
+
+    public Observable<List<ContactData>> getContactDataLocal(){
         return mDatabaseHelper.getContact().distinct();
     }
 
-    public Observable<Response<ResponseApi>> getContactData(){
-        return mContactService.getRibots();
+    public Observable<Response<ResponseMessage>> deleteContact(String id){
+        return mContactService.deleteContact(id);
     }
 
     public Observable<ContactData> synContactData() {
-        return mContactService.getRibots().concatMap(new Function<Response<ResponseApi>, ObservableSource<? extends ContactData>>() {
+        return mContactService.getContact().concatMap(new Function<Response<ResponseApi>, ObservableSource<? extends ContactData>>() {
             @Override
             public ObservableSource<? extends ContactData> apply(Response<ResponseApi> responseApiResponse) throws Exception {
                 return mDatabaseHelper.setContact(responseApiResponse.body().data);

@@ -54,7 +54,7 @@ public class DatabaseHelperTest {
 //    }
 //
 //    @Test
-//    public void getRibots() {
+//    public void getContact() {
 //        Ribot ribot1 = TestDataFactory.makeRibot("r1");
 //        Ribot ribot2 = TestDataFactory.makeRibot("r2");
 //        List<Ribot> ribots = Arrays.asList(ribot1, ribot2);
@@ -62,7 +62,7 @@ public class DatabaseHelperTest {
 //        mDatabaseHelper.setRibots(ribots).subscribe();
 //
 //        TestObserver<List<Ribot>> result = new TestObserver<>();
-//        mDatabaseHelper.getRibots().subscribe(result);
+//        mDatabaseHelper.getContact().subscribe(result);
 //        result.assertNoErrors();
 //        result.assertValue(ribots);
 //    }

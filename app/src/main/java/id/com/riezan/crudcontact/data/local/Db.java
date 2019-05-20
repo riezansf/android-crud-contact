@@ -12,6 +12,7 @@ public class Db {
     public abstract static class ContactTable {
         public static final String TABLE_NAME = "contact";
 
+        public static final String COLUMN_ID = "id";
         public static final String COLUMN_FIRST_NAME = "first_name";
         public static final String COLUMN_LAST_NAME = "last_name";
         public static final String COLUMN_AGE = "age";
@@ -19,6 +20,7 @@ public class Db {
 
         public static final String CREATE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
+                        COLUMN_ID + " TEXT PRIMARY KEY, " +
                         COLUMN_FIRST_NAME + " TEXT NOT NULL, " +
                         COLUMN_LAST_NAME + " TEXT NOT NULL, " +
                         COLUMN_AGE + " INTEGER NOT NULL, " +
@@ -27,6 +29,7 @@ public class Db {
 
         public static ContentValues toContentValues(ContactData contactData) {
             ContentValues values = new ContentValues();
+            values.put(COLUMN_ID, contactData.id());
             values.put(COLUMN_FIRST_NAME, contactData.firstName());
             values.put(COLUMN_LAST_NAME, contactData.lastName());
             values.put(COLUMN_AGE, contactData.age());
@@ -37,6 +40,7 @@ public class Db {
         public static ContactData parseCursor(Cursor cursor) {
 
             return ContactData.builder()
+                    .setId(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID)))
                     .setFirstName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FIRST_NAME)))
                     .setLastName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LAST_NAME)))
                     .setAge(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_AGE)))

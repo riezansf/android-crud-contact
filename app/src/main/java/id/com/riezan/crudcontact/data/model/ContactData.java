@@ -9,6 +9,7 @@ import com.google.gson.TypeAdapter;
 @AutoValue
 public abstract class ContactData implements Parcelable {
 
+    public abstract String id();
     public abstract String firstName();
     public abstract String lastName();
     public abstract int age();
@@ -19,7 +20,7 @@ public abstract class ContactData implements Parcelable {
     }
 
     public static ContactData create(ContactData contactData) {
-        return new AutoValue_ContactData(contactData.firstName(),contactData.lastName(),contactData.age(),contactData.photo());
+        return new AutoValue_ContactData(contactData.id(),contactData.firstName(),contactData.lastName(),contactData.age(),contactData.photo());
     }
 
     public static TypeAdapter<ContactData> typeAdapter(Gson gson) {
@@ -28,6 +29,7 @@ public abstract class ContactData implements Parcelable {
 
     @AutoValue.Builder
     public abstract static class Builder {
+        public abstract Builder setId(String id);
         public abstract Builder setFirstName(String firstName);
         public abstract Builder setLastName(String lastName);
         public abstract Builder setAge(int age);
