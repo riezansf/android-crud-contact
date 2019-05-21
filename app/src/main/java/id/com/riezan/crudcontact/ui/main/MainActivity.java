@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,7 +27,7 @@ import timber.log.Timber;
 
 public class MainActivity extends BaseActivity implements MainMvpView, ContactAdapter.ContactViewHolder.ClickListener {
 
-    private static final String EXTRA_TRIGGER_SYNC_FLAG = "uk.co.ribot.androidboilerplate.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
+    private static final String EXTRA_TRIGGER_SYNC_FLAG = "id.com.riezan.crudcontact.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
 
     @Inject MainPresenter mMainPresenter;
     @Inject ContactAdapter mContactAdapter;
@@ -56,10 +59,48 @@ public class MainActivity extends BaseActivity implements MainMvpView, ContactAd
 
         mMainPresenter.attachView(this);
         mMainPresenter.loadContact();
+    }
 
+    public void startSyncService(){
         if (getIntent().getBooleanExtra(EXTRA_TRIGGER_SYNC_FLAG, true)) {
             startService(SyncService.getStartIntent(this));
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        startSyncService();
+        mMainPresenter.loadContact();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+
+            case R.id.add_contact :
+
+                Intent intent = new Intent(this, ContactFormActivity.class);
+                startActivity(intent);
+
+                break;
+
+            case android.R.id.home: break;
+
+            default:break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -102,9 +143,15 @@ public class MainActivity extends BaseActivity implements MainMvpView, ContactAd
     }
 
     @Override
-    public void onItemClicked(int position) {
-        Timber.d("Clicked "+mContactAdapter.getItem(position).id());
+    public void onDeleteClicked(int position) {
         mMainPresenter.deleteContact(mContactAdapter.getItem(position).id());
+    }
+
+    @Override
+    public void onEditClicked(int position) {
+        Intent intent = new Intent(this, ContactFormActivity.class);
+        intent.putExtra("contactData",mContactAdapter.getItem(position));
+        startActivity(intent);
     }
 
     @Override

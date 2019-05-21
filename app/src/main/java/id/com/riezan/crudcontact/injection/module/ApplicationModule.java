@@ -35,7 +35,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     ContactService provideRibotsService() {
-        return ContactService.Creator.newRibotsService();
+        return ContactService.Creator.newContactService();
     }
 
 }

@@ -9,4 +9,5 @@
 
     <string name="empty_contact">There aren\'t any contact</string>
     <string name="error_loading_contact">There was a problem loading contact</string>
+    <string name="title_activity_add_contact">AddContact</string>
 </resources>

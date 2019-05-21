@@ -3,6 +3,7 @@ package id.com.riezan.crudcontact.injection.component;
 import dagger.Subcomponent;
 import id.com.riezan.crudcontact.injection.PerActivity;
 import id.com.riezan.crudcontact.injection.module.ActivityModule;
+import id.com.riezan.crudcontact.ui.main.ContactFormActivity;
 import id.com.riezan.crudcontact.ui.main.MainActivity;
 
 /**
@@ -13,5 +14,6 @@ import id.com.riezan.crudcontact.ui.main.MainActivity;
 public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
+    void inject(ContactFormActivity contactFormActivity);
 
 }

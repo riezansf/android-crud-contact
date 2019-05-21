@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
+import id.com.riezan.crudcontact.data.model.ContactData;
+import id.com.riezan.crudcontact.data.model.ContactRequestBody;
 import id.com.riezan.crudcontact.data.model.ResponseMessage;
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -13,10 +15,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import id.com.riezan.crudcontact.data.model.ResponseApi;
 import id.com.riezan.crudcontact.util.MyGsonTypeAdapterFactory;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ContactService {
@@ -26,13 +31,19 @@ public interface ContactService {
     @GET("contact")
     Observable<Response<ResponseApi>> getContact();
 
+    @POST("contact")
+    Observable<Response<ResponseMessage>> addContact(@Body ContactRequestBody contactData);
+
     @DELETE("contact/{id}")
     Observable<Response<ResponseMessage>> deleteContact(@Path("id") String id);
+
+    @PUT("contact/{id}")
+    Observable<Response<ResponseMessage>> editContact(@Path("id") String id, @Body ContactRequestBody contactData);
 
     /******** Helper class that sets up a new services *******/
     class Creator {
 
-        public static ContactService newRibotsService() {
+        public static ContactService newContactService() {
 
             //Interceptor for logging raw response
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();

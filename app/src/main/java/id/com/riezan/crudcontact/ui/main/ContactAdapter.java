@@ -64,11 +64,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         @BindView(R.id.text_name) TextView firstNameTextView;
         @BindView(R.id.text_age) TextView ageTextView;
         @BindView(R.id.text_delete) TextView deleteTextView;
+        @BindView(R.id.text_edit) TextView editTextView;
 
         public ClickListener mListener;
 
         public interface ClickListener {
-            void onItemClicked(int position);
+            void onDeleteClicked(int position);
+            void onEditClicked(int position);
             void onStarClicked(View v,int position);
             boolean onItemLongClicked(int position);
         }
@@ -95,7 +97,18 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
                 @Override
                 public void onClick(View view) {
                     if (mListener != null) {
-                        mListener.onItemClicked(getAdapterPosition());
+                        Timber.d("contactData "+getAdapterPosition());
+                        mListener.onDeleteClicked(getAdapterPosition());
+                    }
+                }
+            });
+
+            editTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mListener != null) {
+                        Timber.d("contactData "+getAdapterPosition());
+                        mListener.onEditClicked(getAdapterPosition());
                     }
                 }
             });

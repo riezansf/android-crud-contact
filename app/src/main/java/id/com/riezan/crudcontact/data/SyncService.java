@@ -74,34 +74,8 @@ public class SyncService extends Service {
                     public void onComplete() {
                         Timber.i("Synced successfully!");
                         stopSelf(startId);
-//                    }
                     }
                 });
-
-//        mDataManager.synContactData()
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<ContactData>() {
-//                    @Override
-//                    public void onSubscribe(@NonNull Disposable d) {
-//                        mDisposable = d;
-//                    }
-//
-//                    @Override
-//                    public void onNext(@NonNull ContactData contactData) {
-//                    }
-//
-//                    @Override
-//                    public void onError(@NonNull Throwable e) {
-//                        Timber.w(e, "Error syncing.");
-//                        stopSelf(startId);
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//                        Timber.i("Synced successfully!");
-//                        stopSelf(startId);
-//                    }
-//                });
 
         return START_STICKY;
     }

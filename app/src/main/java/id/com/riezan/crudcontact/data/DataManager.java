@@ -5,7 +5,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import id.com.riezan.crudcontact.data.model.ContactRequestBody;
 import id.com.riezan.crudcontact.data.model.ResponseMessage;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
@@ -54,5 +56,25 @@ public class DataManager {
                 return mDatabaseHelper.setContact(responseApiResponse.body().data);
             }
         });
+    }
+
+    public Observable<Response<ResponseMessage>> addContact(String firstName, String lastName, String age) {
+        ContactRequestBody contactData = new ContactRequestBody();
+        contactData.setFirstName(firstName);
+        contactData.setLastName(lastName);
+        contactData.setAge(Integer.parseInt(age));
+        contactData.setPhoto("photo");
+
+        return mContactService.addContact(contactData);
+    }
+
+    public Observable<Response<ResponseMessage>> editContact(String id, String firstName, String lastName, String age) {
+        ContactRequestBody contactData = new ContactRequestBody();
+        contactData.setFirstName(firstName);
+        contactData.setLastName(lastName);
+        contactData.setAge(Integer.parseInt(age));
+        contactData.setPhoto("photo");
+
+        return mContactService.editContact(id,contactData);
     }
 }
